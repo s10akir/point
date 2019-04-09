@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    image: node:10.15.3  # 2019-04-09時点でのLTS版
+    ports:
+      - 80:3000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    working_dir: /app
+    #command: npm install --no-bin-links; npm run start
+    command: bash -c "npm install && npm run start"
+
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data
