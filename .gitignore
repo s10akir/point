@@ -62,3 +62,6 @@ typings/
 
 # ignore database files
 data/
+
+# ignore webstorm setting
+.idea/
