@@ -1,9 +1,12 @@
+require('./lib/passport.js');
+
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const httpErrors = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
-
+const passport = require('passport');
 const indexRouter = require('./routes/index');
 
 const app = express();
@@ -12,6 +15,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
