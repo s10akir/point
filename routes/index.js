@@ -21,4 +21,11 @@ router.post('/login',
     });
   });
 
+/* ログイン済みユーザのリクエストしか受け付けないAPIの例 */
+router.get('/secure', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json({
+    req: req.user
+  });
+});
+
 module.exports = router;
