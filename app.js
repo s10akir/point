@@ -1,8 +1,11 @@
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const httpErrors = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const indexRouter = require('./routes/index');
 
@@ -12,6 +15,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+
+passport.use(new LocalStrategy((username, password, done) => {
+  // TODO: ユーザの認証機構の実装
+  if (username === 'username' && password === 'password') {
+    return done(null, username);
+  }
+
+  return done(null, false);
+}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
