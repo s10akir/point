@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: node:10.15.3  # 2019-04-09時点でのLTS版
+    image: node:12.2
     ports:
       - 80:3000
     volumes:
